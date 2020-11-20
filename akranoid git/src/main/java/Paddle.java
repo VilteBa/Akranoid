@@ -1,44 +1,21 @@
-import lombok.Data;
-
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.util.Scanner;
-import java.util.Vector;
 
+public class Paddle extends Shape{
 
-@Data
-public class Paddle {
+    private static Paddle paddle = new Paddle(100, 570, 150, 15, Color.GREEN);
 
-    private int x ;
-    private int y ;
-    private int velocityX = 0 ;
-    private int height ;
-    private int width ;
-    private Color color;
-
-    public Paddle(int x, int y, int width, int height, Color color){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.color = color;
+    private Paddle(int x, int y, int width, int height, Color color){
+        super(x, y, width, height, color);
     }
 
-    public Rectangle getArea(){
-        return new Rectangle(x, y, width, height);
+    public static Paddle getInstance(){
+        return paddle;
     }
-
-    public void draw(Graphics g) {
-        g.setColor(color);
-        g.fillRect(x, y, width, height);
-    }
-
     public void moveRight() {
-        x = x + 20;
+        x= x >= 540 ? 500 : x + 20;
     }
 
     public void moveLeft() {
-        x = x - 20;
+        x= x <= 20 ? 0 : x - 20;
     }
 }
